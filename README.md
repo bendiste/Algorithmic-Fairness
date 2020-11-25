@@ -1,2 +1,2 @@
 # Algorithmic-Fairness
-Algorithmic Toolkits trial and comparison
+Algorithmic fairness Toolkits trial execution and comparison
