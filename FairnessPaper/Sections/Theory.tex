@@ -1,0 +1,121 @@
+%!TEX root = ../COSCFair.tex
+
+\section{Theoretical Analysis}
+\label{sec:theory}
+
+In this paper, we propose a framework that mitigates bias in a dataset in pre-processing step with the goal of obtaining fair predictions from a classifier when it is trained with the pre-processed dataset. 
+The problem that we are studying can be formalized as follows: Given a dataset $D = \left\{ X, S, Y \right\}$, where \emph{X} represents the set of attributes that does not contain sensitive information regarding individuals, \emph{S} is the set of sensitive attributes containing sensitive information, and $Y \in \left\{ 0,1 \right\}$ is the original class label of individuals, which indicates the decision outcome. 
+
+Let $|D|$ represent the cardinality of the dataset $D$. We assume, without loss of generality, that \emph{D} is an imbalanced dataset, where the number of instances that belong to the different groups in the dataset is different. 
+We use $G/G'$ to represent the values of unprivileged/privileged group, respectively. 
+Let $\widehat{Y}$ be the set of predicted outcomes derived by a classifier from the dataset $T$. In order to deem the predictions of a classifier trained with a dataset \emph{D} fair as well as satisfactorily accurate, we consider a set of fairness metrics $F =\left\{F_{m_{1}}, F_{m_{2}}, \dots, F_{m_{k}}  \right\}$ and a set of prediction performance metrics $A =\left\{A_{m_{1}}, A_{m_{2}}, \dots, A_{m_{l}}  \right\}$ that needs to be satisfied. In this paper, twe consider five fairness metrics $F =\left\{F_{m_{i}}, 1 \le i \le 5 \right\}$, which are \emph{demographic parity, disparate impact, equalized odds, predictive parity}, and \emph{consistency}. We also consider three prediction performance metrics $A =\left\{A_{m_{1}}, A_{m_{2}}, A_{m_{3}} \right\}$, which refer to \emph{accuracy, balanced accuracy} and \emph{F1-Score}. Our goal is to increase the values of the fairness metrics while minimizing the effects on the performance metrics. Table~\ref{tab:notation} explains the notations used in this section. 
+
+\input{Sections/Tables/notations}
+
+In the rest of this section, we discuss the fairness metrics and perform a theoretical analysis to improve the fairness in the predictions of a given classifier. We provide formal definitions of the fairness metrics with more details than our discussion in Section \ref{sec:related}. 
+
+\stitle{Demographic Parity (DP):} this metric states that, the instances in both protected (unprivileged) and unprotected (privileged) groups should have equal probability of being predicted as positive outcome. This metric can be applied on the original class labels in a dataset as well as on the classifier predictions. For a dataset to be fair, the following condition must be satisfied:
+\[P\left[Y({\bf x})=1\ |\ S({\bf x})=G' \right]  = P\left[Y({\bf x})=1\ |\ S({\bf x}) = G \right].\] That means, 
+% \begin{equation} \label{eq:DPDiff}
+% \small
+% DP_{diff} = P\left[Y({\bf x})=1\ |\ S({\bf x})=G' \right] - P\left[ {Y({\bf x})}=1\ |\ S({\bf x}) = G \right] \approx 0.
+% \end{equation}
+\begin{align} \label{eq:DPDiff}
+\begin{split}
+DP_{diff} = &\ P\left[Y({\bf x})=1\ |\ S({\bf x})=G' \right]
+    \\& - P\left[ {Y({\bf x})}=1\ |\ S({\bf x}) = G \right] \approx 0.
+\end{split}
+\end{align}
+The same definition can be applied to ensure the classifier's fairness by substituting the original labels by the predicted ones.% in the Equations.  
+
+\stitle{Disparate Impact (DI):} is defined as the ratio between the probability of protected and unprotected groups getting positive or desired outcomes. Based on a legal rule \cite{US_guideline}, a dataset or a classifier is considered fair if its $DI$ ratio is at least 0.8, which is also known as the \emph{80\%-rule}. $DI$ can be formulated as:
+\begin{equation}\label{eq:di}
+DI(D) = \frac{ P\left[({\bf x}) = 1 | S({\bf x}) = G\right]} {P\left[Y({\bf x}) = 1 | S({\bf x})=G'\right]}.
+\end{equation}
+In this research we target increasing the value of $DI$ to be close to or greater than $0.8$. Similar to demographic parity, this metric can also be used to measure the fairness of the classifier's predictions.
+
+
+\stitle{Equalized Odds (EO):} this metric states that instances from protected and unprotected groups should have equal True Positive Rate (TPR) and False Positive Rate (FPR). 
+if we denote, \\
+\begin{center}
+$P_1 = P\left[ \widehat{Y}({\bf x})=1\ |\ S({\bf x})=G', Y ({\bf x})=1 \right],$\\ 
+$P_2 = P\left[ \widehat{Y}({\bf x})=1\ |\ S({\bf x})=G, Y({\bf x})=1 \right],$\\  
+$P_3 = P\left[ \widehat{Y}({\bf x})=1\ |\ S({\bf x})=G', Y({\bf x})=0 \right]$, \\
+$P_4 = P\left[ \widehat{Y}({\bf x})=1\ |\ S({\bf x})=G, Y({\bf x})=0 \right]$.\\
+\end{center}
+then the EO is defined as:
+\begin{equation}\label{eq:eo}
+P_1 = P_2\ \text{and}\ P_3 = P_4 \\
+\end{equation}
+In our experiments, we use the Average Equalized Odds difference (AEO Diff.), which is defined as:
+\[
+AEO_{diff} = \frac{(P_1 - P_2)+(P_3 - P_4)}{2}. 
+\]
+According to AEO Diff., a classifier is fair if the $AEO_{diff}$ value should be close to $0$.
+
+
+
+\stitle{Predictive Parity:} to deem a classifier as fair in terms of predictive parity, both protected and unprotected groups should have the same positive predictive value. It is formalized as:\\
+\begin{small}
+$P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G\right] = P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G'\right]$.
+\end{small}
+
+\stitle{Consistency:} this individual fairness metric measures how similar the labels are for the similar instances in a dataset based on the k-neighbors of the instance. Thus, instances should have the same labels if they are similar in terms of features. This metric is formulated as:
+
+% $ y_{NN} = 1 - \frac{1}{n}\sum_{i=1}^n |\hat{y}_i - \frac{1}{{k_{neighbors}}}  \sum_{j\in\mathcal{N}_{{n_{neighbors}}}(x_i)} \hat{y}_j|$.
+
+%this is directly from AIF360 Consistency computation
+\[
+Consistency = 1 - \frac{1}{|D|}\sum_{i=1}^{|D|} \left| \widehat{y}({\bf x}_i) -
+           \frac{1}{\left|kNN({\bf x}_i)\right|} \sum_{{\bf x}_j\in kNN({\bf x}_i)} \widehat{y}({\bf x}_j) \right|,
+\]
+where $\left|kNN({\bf x})\right|$ represents the set of closed $k$ neighbors for the kNN computation.
+
+
+In the rest of this section, we discuss how to improve the $DI$ metric and how the improvement will affect the values of other important metrics such as accuracy and F1-Score. Let $|D|$ be the number of instances in the dataset $D$, $N_p$ %= \# +ve
+be the total number positive examples in the dataset, $N_{G_p}/N_{G'_p}$ %  = \# +ve | S = G
+be the number positive examples from the unprivileged/privileged groups, respectively. Let $\xi$ be the percentage value of $DI$ for the original dataset ($DI(D) = \xi/100$). Our goal is to increase the value of $DI$ by $\delta/100$, with $0 < \delta < 125 - \xi $, to make $DI(C)$ close to or greater than $80\%$, where $C$ is a given classifier. To do so, we should increase/decrease the number of instances that are predicted positive from the unprivileged/privileged groups. If $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G) = \frac{N_{G_p}}{N_G}$, and $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G') = \frac{N_{G'_p}}{N_{G'}}$. 
+% \fixme{--Hakim: I finished revising the analysis up to this point}
+Since, $DI(D) = \xi\%$ then: 
+\begin{equation} \label{eq:NGP}
+\frac{N_{G_p}/{N_G}}{N_{G'_p}/{N_{G'}}} = \frac{\xi}{100}\ \text{and}\ N_{G_p} = \frac{\xi N_G N_{G'_p}}{100N_{G'}}.
+\end{equation}
+To increase the value of $DI(C)$ to $(\xi+\delta)\%$, we need:
+\begin{equation}\label{eq:general}
+\frac{\left(N_{G_p}+\epsilon\right)/{N_G}}{\left(N_{G'_p}-\gamma\right)/{N_{G'}}} = \frac{\xi+\delta}{100},
+% \frac{N_G+\epsilon}{W-\omega-\gamma} = \frac{\xi+\delta}{100}.    
+\end{equation}
+where $\epsilon$ is the number of instances (records) from the unprivileged group that should be predicted positive while their original label is negative. 
+Conceptually, $\epsilon$ can take any integer value between $0$ and $N_G - N_{G_p}$.
+Conversely, $0 < \gamma < N_{G'_p}$ is the number of instances from the privileged group that should be predicted negative while their original label is positive. 
+Solving for $\epsilon$ and $\gamma$, we get:
+\begin{equation} \label{eq:compute_eps_gam}
+    \frac{\left(N_{G_p}+\epsilon\right){N_{G'}}}{\left(N_{G'_p}-\gamma\right){N_{G}}} = \frac{\xi+\delta}{100}.
+\end{equation}
+
+Substituting $N_{G_P}$ from Eq. (\ref{eq:NGP}) in Eq. (\ref{eq:compute_eps_gam}), we get:
+\[
+\left(\xi + \delta\right)\left(N_{G'_p}-\gamma\right)N_{G} = 100 N_{G'} \left(\frac{\xi N_G N_{G'_p}}{100N_{G'}} + \epsilon\right) 
+\]
+Hence:
+\[
+100 \epsilon N_{G'} +\gamma \left(\xi + \delta\right) N_{G} = \delta N_{G'_p} N_G
+\]
+We can distinguish between three special cases:
+\begin{enumerate}[label=\textbf{C\arabic*:}]
+    \item $\epsilon = \gamma$, in this case we need to increase the number of instances from the protected group that are predicted positive by $\epsilon = \frac{\delta N_{G'_p} N_G}{100N_{G'}+\left(\xi+\delta\right)N_G}$ and decrease the number of instances from the unprotected group that are predicted positive by the same amount.
+    \item $\gamma = 0$, in this case we need to increase the number of instances from the protected group that are predicted positive by $\epsilon = \frac{\delta N_{G'_p} N_G}{100N_{G'}}$ while keeping the same number of positives from the unprotected group.
+    \item $\epsilon = 0$, in this case we need to decrease the number of instances from the unprotected group that are predicted positive by $\gamma = \frac{\delta N_{G'_p} N_G}{\left(\xi+\delta\right)N_G}$ while keeping the same number of positives from the protected group.
+\end{enumerate}
+
+Since the number of instances (records) from the unprivileged group is significantly smaller than the number of instances from the privileged group, it can be easily shown that increasing the positives of the unprivileged group while keeping the number of positives from the privileged group unchanged will incur the minimum number of changes (case {\bf C2}: $\gamma = 0$). This cannot be achieved in real life scenarios but we can increase the probability of classifying an instance as positive given that it is from the unprivileged group. 
+To do so, we consider generating more examples from the  unprivileged group with positive label.To do so, we use oversampling technique to generate synthetic data from the class of the minority. Since the synthetic data generator, such as SMOTE~\cite{smote}, interpolates the original instances in the training set to generate new instances, the quality of the generated instances depends on the similarity between the interpolated instances. To increase the similarity between the instances, we cluster the data before generating the new instances. 
+In the evaluation section, we report the number of instances that have been predicted differently due to our solution. 
+
+It should be noted that improving the $DI$ metric will certainly affect the other metrics. For example, according to Eq. (\ref{eq:general}), increasing $DI$ by $\delta$ will have the following effects: i) the number of True Positives (TP) will be decreased by $\gamma$. We assume that we have trained a perfect classifier, which can predict all the labels in the test set correctly. Based on the required changes in the classifier's predictions, if the original true positives is $TP$ then the new true positives $TP'= TP - \gamma$; ii) similarly, the True Negatives will be decreased by $\epsilon$ (i.e. $TN'= TN -\epsilon$); iii) The False Positives (FP) will be increased by $\epsilon$ ($FP'= FP + \epsilon$) and the False Negatives (FN) will be increased by $\gamma$ ($FN'= FN + \gamma$). Thus, the perfect classifier's accuracy will be decreased by $\left(\frac{\gamma+\epsilon}{|D|}\right)$. If $F'_1$ is the new $F1\text{-}Score$, then $F'_1 = \frac{2*(TP-\gamma)}{2*TP+FN+FP+\epsilon-\gamma}$. For the case of perfect classifier, $F_1 = 1$ and $F'_1 = \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$. The decrease in the $F1\text{-}Score$ will be $1 - \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$.
+
+\begin{example}
+\noindent The German dataset \cite{UCIdfs} has 1000 instances. We split the dataset for training and testing using the 70/30 rule with stratification. In the test set $T$, we have $N_{G'} = 181$ instances from the privileged group and $N_G = 31$ from the unprivileged group. The number of positive instances from privileged/unprivileged is $(N_{G'_p} = 134)$/$(N_{G_p} = 17)$, respectively. In this case, improving $DI(C)$ from $74\%$ to be greater than $80\%$ while considering $\epsilon = 0$ in Eq. (\ref{eq:general}) and assuming that we have a perfect classifier, we will need to predict approximately $10$ instances from the privileged group to be negative instead of their original positive label. In this case, the accuracy of the perfect classifier will decrease by $10/300 = 3.3\%$ and $F1\text{-}Score$ will be reduced by $\frac{10}{2*210-10}= 2.4\%$. However, when $\gamma = 0$, $\epsilon$ will be 2 and the decrease in accuracy and $F1\text{-}Score$ will be $0.6\%$ and $0.5\%$, respectively.
+\end{example}
+
+% Based on our analysis and the statistics from the data, we can conclude that the classifier fail to predict more positive instances from the unprivileged group because the number of positive instances in the training set is small compared to the number of positive instances from the privileged group. To solve the problem, we consider generating more examples from the  unprivileged group with positive label.To do so, we use oversampling technique to generate synthetic data from the class of the minority. Since the synthetic data generator, such as SMOTE~\cite{smote}, interpolates the original instances in the training set to generate new instances, the quality of the generated instances depends on the similarity between the interpolated instances. To increase the similarity between the instances, we cluster the data before generating the new instances. 
