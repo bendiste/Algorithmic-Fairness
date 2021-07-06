@@ -1,0 +1,51 @@
+%!TEX root = ../COSCFair.tex
+\section{Introduction}
+
+% 1- /effects of ML in humans lives
+The usage of Machine Learning (ML) in a wide diversity of domains has affected everyone's daily life. For example, machine learning algorithms are used for decision making in business and government systems~\cite{rudin2019stop}, in recommending systems, advertisements, hiring systems, and so on. Machine learning algorithms have become widespread because of their high performance compared to humans in such tasks. 
+
+Machine learning algorithms can handle big volumes of data for complex computational tasks in significantly shorter time compared to humans. Besides, people usually have subjective opinions and points of view, which can lead to bias in their decisions. 
+Unfortunately, machine learning algorithms are not always objective. Using these algorithms in several decision-making systems and other services may cause serious discrimination against certain groups of people in society. A large number of systems have been identified to show bias against specific groups of the society. In this paper, we mention the following examples:  i) Amazon's algorithm for free same-day delivery made racially biased decisions while choosing which neighborhoods to provide this service \cite{soper_2016,letzter_2016}; ii) job search portals that uses ML algorithms for candidate ranking had a significant gender bias against women \cite{lahoti2019ifair}; iii) the COMPAS recidivism estimation tool \cite{compas}, which is used in many courts of the United States shows significant discrimination against African-American males by predicting a higher risk for recidivism compared to white male offenders \cite{propublica}. According to the automatically predicted risk level of the defendants, courts can keep the defendants in custody until the trial and consider this risk score while deciding the verdict. 
+
+
+% With the example cases, we see that a bias in machine learning algorithms can significantly affect people's lives economically (job applicants ranking tool) and socially (COMPAS tool).
+
+
+
+
+
+%3-Talk about bias types
+There are several reasons behind the bias in ML algorithms. It could emerge due to the historical bias or prejudice reflected in the decision variable (class label). Another reason could be the under-representation of a certain group of people in the training set of a dataset. A third reason could be due to limited features in a dataset that could be less informative about the population. The existence of attributes that are directly related to the sensitive attributes, such as race and gender, even when these sensitive attributes are not used to train the algorithms could be considered as another reason. These potential problems in a dataset cause machine learning algorithms to keep the existing bias and reflect it in its decisions, or even sometimes exacerbates the existing bias.
+
+
+However, in order to identify and prevent bias in machine learning, researchers have come up with several different fairness metrics around fairness-aware machine learning. To improve the algorithmic fairness according to the fairness metrics, different algorithmic approaches have been developed  to eliminate the existing bias or mitigate it under a certain level. Unfortunately, there is no consensus on which fairness metrics and mitigation algorithms are the best to ensure fairness yet.
+
+
+In this paper, we propose COSCFair, a pre-processing framework that can handle datasets with multiple sensitive attributes by eliminating its both class and group imbalance via an oversampling technique to mitigate the bias before training the classifiers. This way, the classifier will not carry on or exacerbate the initially existing bias in a dataset. By eliminating both class and group imbalance simultaneously and obtaining the same base rates for all subgroups in a dataset, the framework will be able to satisfy multiple fairness metrics in the literature, which cannot be satisfied otherwise. Our framework is, therefore, based on oversampling the under-represented subgroups in the dataset. However, since oversampling techniques introduce synthetic samples in the dataset, we cluster the data before performing the oversampling to improve the quality of the synthetic data. Since the original data samples in each cluster has more similarity with each other, the oversampling technique used on these clusters will yield better quality of synthetic samples. We introduce three strategies to train the classifiers after oversampling the under-represented groups: 
+i) combine the data in all clusters and train a single classifier; 
+ii) train a classifier per cluster and assign the label for the new samples according to the output of the classifier that is trained on the data from the closest cluster; 
+iii) use a weighing mechanism to determine the contribution of each classifier in deciding the labels of the new samples. Our contribution in this paper can be summarized as follows:
+\begin{itemize}
+    \item We present a theoretical analysis on possible improvements for the fairness metrics and the effects of the improvements on the classifiers accuracy.
+    \item We develop a bias-mitigation framework that consistently improves the algorithmic fairness. 
+    \item We train different classifiers using the data in each cluster and propose an effective decision fusion method. 
+    \item We perform extensive experiments on three well known datasets that are widely used as benchmarks for evaluating the fairness of ML algorithms.
+    
+    %method that combines the decision of the classifiers to be used as the predicted label. 
+\end{itemize}
+
+The rest of the paper is organized as follows: Section \ref{sec:related} presents the related work on fairness metrics and bias mitigation algorithms. In Section \ref{sec:theory}, we perform a theoretical analysis on improving the algorithmic fairness and discuss its effects on the classifiers' performance metrics. Section \ref{sec:framework} presents our framework while Section \ref{sec:eval} evaluates our framework against a set of baseline methods. Conclusion and future directions are presented in Section \ref{sec:conclusion}.
+
+
+
+
+
+% \subsection{Motivation}
+
+% An increase in the usage of machine learning algorithms in various types of decisions in different domains such as employment, education, and financial applications regarding individuals has also increased the importance of the decisions or predictions of these algorithms to be free from bias since they affect the lives of individuals more and more in various levels. Even though there are numerous bias mitigation algorithms are proposed to ensure fairness, there is no consensus on which approach is the best and robust one to follow since the performance of these algorithms can fluctuate from datasets to datasets. In addition, the chosen fairness metrics to quantify fairness and measure the performance of these algorithms can affect the outcome significantly. For example, while a couple of fairness metrics deem the predictions of a classifier satisfactorily fair, the others might deem them unfair. Furthermore, most of the mitigation algorithms proposed in the literature can handle only single binary attributes, which means that they can handle only a limited type of dataset. However, not all the sensitive attributes consist of only two possible values in a dataset. There are only a few mitigation algorithms that can process multiple binary sensitive attributes and/or multi-valued sensitive attributes. 
+
+% Another overlooked topic in the domain is the imbalance in the number of samples that each group has in datasets. Datasets might have an imbalanced distribution over the groups defined by the sensitive attributes as well as an imbalanced distribution over the samples with positive and negative class labels. These imbalances and under-representation of certain groups can create bias or exacerbate the existing bias, which is emerged from biased data collection, in the predictions of classification algorithms. However, there are only a few studies that focus on solving this problem in fairness.
+
+% Thus to efficiently mitigate fairness in machine learning, it is necessary to develop an approach that can consider various aspects that cause classifiers to output biased predictions. To find a robust solution to this problem, 
+
+
