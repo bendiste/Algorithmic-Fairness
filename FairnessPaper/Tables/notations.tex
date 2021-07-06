@@ -1,0 +1,27 @@
+%!TEX root = ../COSCFair.tex
+
+\begin{table}[h]
+\begin{small}
+\begin{tabularx}{\columnwidth}{|l|X|}
+\hline
+\textbf{Notation} &\textbf{Description} \\ \hline
+$D(X, S, Y)$ & training dataset. \\ \hline
+$T(X, S, Y)$ & testing dataset. \\ \hline
+$X$ & the set of attributes with un-sensitive information about individuals. \\ \hline
+$S$ & the set of attributes with sensitive information. \\ \hline
+$Y/\widehat{Y}$ & the original/predicted class labels of the instances 
+in a given dataset, respectively. \\ \hline
+$D_G$ & $D_G = \{{\bf x} \in D\ |\ S({\bf x}) = G\}$ the set of records with unprivileged values in their sensitive attributes. \\ \hline
+$D_{G'}$ & $D_G' = \{{\bf x} \in D | S({\bf x}) = G'\}$ the set of records that have privileged values. \\ \hline
+$N_G, N_{G'}$ & $N_G = |D_G|$, $N_{G'} = |D_{G'}|$. \\ \hline
+$D_{G_p}$ & $D_{G_p} = \{\boldsymbol{x} \in D_G\ |\ Y(\boldsymbol{x}) = 1\}$. \\ \hline
+$D_{{G'}_p}$ & $D_{{G'}_p} = \{\boldsymbol{x} \in D_{G'}\ |\ Y(\boldsymbol{x}) = 1\}$. \\ \hline
+$N_{G_p}, N_{G'_p}, N_p$ & $N_{G_p} = |D_{G_p}|$, $N_{G'_p} = |D_{G'_p}|$, $NP = N_{G_p} + N_{G'_p}$. \\ \hline
+$F_{m_i}$ & fairness metric. \\ \hline
+$A_{m_i}$ & performance metric.\\ \hline 
+% \\ \hline
+\end{tabularx}
+\caption{\label{tab:notation} Notation.}
+\end{small}
+\vskip -0.1in
+\end{table}
