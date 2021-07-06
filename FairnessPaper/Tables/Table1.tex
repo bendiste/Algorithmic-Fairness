@@ -1,0 +1,17 @@
+%!TEX root = ../COSCFair.tex
+
+\begin{table*}[ht!]
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Dataset}                                                                        & \textbf{UCI Adult Income}                                                                             & \textbf{German Credit}                                            & \textbf{COMPAS Recidivism}                                                   \\ \hline
+\textbf{Domain}                                                                         & Income                                                                                                & Credit approval                                                   & Criminal risk assessment                                                     \\ \hline
+\textbf{\# of Attributes}                                                               & 14                                                                                                    & 20                                                                & 51                                                                           \\ \hline
+\textbf{\# of Instances}                                                                & 48.842                                                                                                & 1000                                                              & 7.918                                                                        \\ \hline
+\textbf{\# of Sensitive Attributes}                                                     & 2                                                                                                     & 2                                                                 & 2                                                                            \\ \hline
+\textbf{Names of the Sensitive Attributes}                                              & Gender, Race                                                                                          & Age, Gender                                                       & Gender, Race                                                                 \\ \hline
+\textbf{Favorable Sensitive Value(s)}                                                   & Male, Caucasian                                                                                       & $\ge 40$, Male                                           & Female, Caucasian                                                            \\ \hline
+\textbf{\begin{tabular}[c]{@{}l@{}}Decision Labels\\ (desired, undesired)\end{tabular}} & \begin{tabular}[c]{@{}l@{}}High Income($\ge 50k$),\\ Low Income($< 50k$)\end{tabular} & \begin{tabular}[c]{@{}l@{}}Good Credit,\\ Bad Credit\end{tabular} & \begin{tabular}[c]{@{}l@{}}Did not Recidivate,\\ Did Recidivate\end{tabular} \\ \hline
+\end{tabular}
+\caption{\label{Table1} Detailed information of the datasets that are used in the experiments}
+\vskip -0.1in
+\end{table*}
