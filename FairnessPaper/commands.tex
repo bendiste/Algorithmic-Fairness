@@ -1,0 +1,394 @@
+%!TEX root = main.tex
+
+% make the paper wider while keeping the page layout unaffected 
+%\paperwidth=\dimexpr \paperwidth + 0.4cm\relax
+%\oddsidemargin=\dimexpr\oddsidemargin + 0.2cm\relax
+%\evensidemargin=\dimexpr\evensidemargin + 0.2cm\relax
+%\marginparwidth=\dimexpr \marginparwidth + 0.6cm\relax
+% --------------------------------------------------------
+
+\newcommand{\eat}[1]{}
+
+\usepackage{tabularx,booktabs}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{epsfig}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{paralist}
+\usepackage{enumerate}
+\usepackage{semantic}  
+%\usepackage{enumitem}
+%\usepackage[table]{xcolor}
+%\usepackage[all]{xy}
+\usepackage[color,matrix,arrow,all]{xy}
+%\usepackage{cite}
+\usepackage{comment}
+\usepackage{booktabs}
+\usepackage{balance}
+\usepackage{stmaryrd}
+\usepackage{pifont}
+\usepackage{hhline}
+%\usepackage{mathabx}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{float}
+\usepackage[flushleft]{threeparttable}
+
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{makecell}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{calc}
+
+%\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+%\usepackage[export]{adjustbox}% http://ctan.org/pkg/adjustbox
+%\usepackage[noend]{algorithmic}
+%\usepackage{algorithm}
+
+\newtheorem{myTheorem}{\textbf{Theorem}}
+\newtheorem{myDefinition}{Definition}
+\newtheorem{myExample}{\textbf{Example}}
+
+\newcommand{\add}[1]{\textcolor{blue}{{#1}}}
+
+\sloppy
+\newcommand{\rtable}[1]{\ensuremath{\mathsf{#1}}}
+\newcommand{\ratt}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\at}[1]{\protect\ensuremath{\mathsf{#1}}\xspace}
+\newcommand{\bfit}[1]{\textbf{\textit{#1}}}
+\newcommand{\myhrule}{\rule[.5pt]{\hsize}{.5pt}}
+\newcommand{\oneurl}[1]{\texttt{#1}}
+\newcommand{\tabstrut}{\rule{0pt}{4pt}\vspace{-0.1in}}
+\newcommand{\stab}{\vspace{1.2ex}\noindent}
+\newcommand{\sstab}{\rule{0pt}{8pt}\\[-2.2ex]}
+\newcommand{\vs}{\vspace{1ex}}
+\newcommand{\exa}[2]{{\tt\begin{tabbing}\hspace{#1}\=\+\kill #2\end{tabbing}}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\match}{\rightleftharpoons}
+
+\newcommand{\true}{\kw{true}}
+\newcommand{\kop}{\kw{op}}
+\newcommand{\nil}{\kw{nil}}
+\newcommand{\Op}{\kw{Op}}
+
+\newcommand{\la}{\leftarrow}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\mat}[2]{{\begin{tabbing}\hspace{#1}\=\+\kill #2\end{tabbing}}}
+\newcommand{\m}{\hspace{0.05in}}
+\newcommand{\ls}{\hspace{0.1in}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\beqn}{\begin{eqnarray*}}
+\newcommand{\eeqn}{\end{eqnarray*}}
+\newcommand{\card}[1]{\mid\! #1\!\mid}
+\newcommand{\fth}{\hfill $\Box$}
+%\newcommand{\AND}{\displaystyle{\bigwedge_{i=1}^{n}}}
+%\newcommand{\AND}{\displaystyle{\bigwedge_{i=1}^{m}}}
+%\newcommand{\U}[1]{\displaystyle{\bigcup_{#1}}}
+\newcommand{\Sm}[1]{\displaystyle{\sum_{#1}}}
+\newcommand{\stitle}[1]{\vspace{1ex}\noindent{\bf #1}}
+\newcommand{\ititle}[1]{\vspace{1ex}\noindent{\it #1}}
+\newcommand{\etitle}[1]{\vspace{0.8ex}\noindent{\underline{\em #1}}}
+\newcommand{\betitle}[1]{\vspace{0.8ex}\noindent{\underline{\bf {\em #1}}}}
+\renewcommand{\t}{\tau}
+\newcommand{\Inh}[1]{\$#1}
+\renewcommand{\r}[1]{{\it rule}(#1)}
+\newcommand{\pa}{\parallel}
+\newcommand{\LHS}{\mbox{\small LHS}\xspace}
+\newcommand{\RHS}{\mbox{\small RHS}\xspace}
+\newcommand{\ie}{{\em i.e.,}\xspace}
+\newcommand{\eg}{{\em e.g.,}\xspace}
+\newcommand{\wrt}{\emph{w.r.t.}\xspace}
+\newcommand{\aka}{\emph{a.k.a.}\xspace}
+\newcommand{\kwlog}{\emph{w.l.o.g.}\xspace}
+\newcommand{\Equa}{\mbox{\small EQU}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ALGORITHMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\SELECT}{\mbox{{\bf select}}\ }
+\newcommand{\FROM}{\mbox{{\bf from}\ }}
+\newcommand{\WHERE}{\mbox{\bf where}\ }
+\newcommand{\SUM}{\mbox{{\bf sum}}\ }
+\newcommand{\GROUPBY}{\mbox{{\bf group by}}\ }
+\newcommand{\HAVING}{\mbox{{\bf having}}\ }
+\newcommand{\CASE}{\mbox{{\bf case}}\ }
+\newcommand{\END}{\mbox{{\bf end}}\ }
+\newcommand{\WHEN}{\mbox{{\bf when}}\ }
+\newcommand{\EXISTS}{\mbox{{\bf exists}}\ }
+\newcommand{\COUNT}{\mbox{\kw{count}}}
+\newcommand{\INSERTINTO}{\mbox{{\bf insert into}}\ }
+\newcommand{\UPDATE}{\mbox{{\bf update}}\ }
+\newcommand{\SET}{\mbox{{\bf set}}\ }
+\newcommand{\IN}{\mbox{{\bf in}}\ }
+\newcommand{\Null}{\mbox{{\it null}}}
+\newcommand{\If}{\mbox{\bf if}\ }
+\newcommand{\Then}{\mbox{\bf then}\ }
+\newcommand{\Else}{\mbox{\bf else}\ }
+\newcommand{\To}{\mbox{\bf to}\ }
+\newcommand{\Let}{\mbox{\bf let}\ }
+\newcommand{\Continue}{\mbox{\bf continue}\ }
+%\newcommand{\Else}{\mbox{\bf else}\ }
+%\newcommand{\ElseIf}{\mbox{\bf elseif}\ }
+%\newcommand{\While}{\mbox{\bf while}\ }
+%\newcommand{\Begin}{\mbox{\bf begin}\ }
+%\newcommand{\End}{\mbox{\bf end}\ }
+\newcommand{\Do}{\mbox{\bf do}\ }
+\newcommand{\Downto}{\mbox{\bf downto}\ }
+%\newcommand{\Repeat}{\mbox{\bf repeat}\ }
+\newcommand{\Until}{\mbox{\bf until}\ }
+\newcommand{\For}{\mbox{\bf for}\ }
+\newcommand{\ForEach}{\mbox{\bf for each}\ }
+%\newcommand{\Or}{\mbox{\bf or}\ }
+\renewcommand{\And}{\mbox{\bf and}\ }
+%\newcommand{\Not}{\mbox{\bf not}\ }
+\newcommand{\Return}{\mbox{\bf return}\ }
+%\newcommand{\Case}{\mbox{\bf case}\ }
+\newcommand{\Of}{\mbox{\bf of}\ }
+\newcommand{\EndCase}{\mbox{\bf end-case}\ }
+\newcommand{\NIL}{\mbox{\em nil}}
+\newcommand{\False}{\mbox{\em false}}
+\newcommand{\True}{\mbox{\em true}}
+\newcommand{\algAND}{{\sc and}\xspace}
+%\newcommand{\OR}{{\sc or}\xspace}
+%\newcommand{\NOT}{{\sc not}\xspace}
+\newcommand{\kw}[1]{{\ensuremath {\mathsf{#1}}}\xspace}
+\newcommand{\cf}{\kw{cf}}
+
+\newcounter{ccc}
+\newcommand{\bcc}{\setcounter{ccc}{1}\theccc.}
+\newcommand{\icc}{\addtocounter{ccc}{1}\theccc.}
+\newcommand{\SAT}{{\mbox{\small\sf SAT}\xspace}}
+\newcommand{\ECFD}{{\small eCFD}\xspace}
+\newcommand{\DQR}{{\sc dqr}\xspace}
+\newcommand{\MDM}{{\sc mdm}\xspace}
+\newcommand{\CFD}{{\small CFD}\xspace}
+\newcommand{\CFDs}{{\small CFDs}\xspace}
+\newcommand{\PFD}{{\small PFD}\xspace}
+\newcommand{\PFDs}{{\small PFDs}\xspace}
+\newcommand{\DC}{{\small DC}\xspace}
+\newcommand{\DCs}{{\small DCs}\xspace}
+\newcommand{\IC}{{\small IC}\xspace}
+\newcommand{\ICs}{{\small ICs}\xspace}
+\newcommand{\MD}{{\small MD}\xspace}
+\newcommand{\MDs}{{\small MDs}\xspace}
+\newcommand{\FD}{{\small FD}\xspace}
+\newcommand{\FDs}{{\small FD}{\small s}\xspace}
+\newcommand{\IND}{{\sc ind}\xspace}
+\newcommand{\INDs}{{\sc ind}{\small s}\xspace}
+\newcommand{\NP}{{\small NP}\xspace}
+\newcommand{\NC}{{\sc NC}\xspace}
+\newcommand{\coNP}{co{\small NP}\xspace}
+\newcommand{\PTIME}{{\sc PTIME}\xspace}
+\newcommand{\PSPACE}{{\small PSPACE}\xspace}
+\newcommand{\EXPTIME}{{\sc exptime}\xspace}
+\newcommand{\NPSPACE}{{\sc npspace}\xspace}
+\newcommand{\dom}{\protect\ensuremath{\mathsf{dom}}\xspace}
+\newcommand{\adom}{\protect\ensuremath{\mathsf{adom}}\xspace}
+\newcommand{\atset}{\protect\ensuremath{\mathsf{attr}}\xspace}
+\newcommand{\attr}[1]{\protect\ensuremath{\mathsf{#1}}\xspace}
+\newcommand{\attrset}{\protect\ensuremath{\mathsf{attr}}\xspace}
+\newcommand{\finatset}{\protect\ensuremath{\mathsf{finattr}}\xspace}
+\newcommand{\RDF}{{\sc rdf}\xspace}
+\newcommand{\KB}{{\sc kb}\xspace}
+\newcommand{\KBs}{{\sc kb}{\small s}\xspace}
+\newcommand{\URI}{{\sc uri}\xspace}
+\newcommand{\URIs}{{\sc uri}{\small s}\xspace}
+\newcommand{\HTML}{{\sc html}\xspace}
+\newcommand{\UNIX}{{\sc unix}\xspace}
+\newcommand{\DTD}{{\sc dtd}\xspace}
+\newcommand{\JDBC}{{\sc jdbc}\xspace}
+\newcommand{\DTDs}{{\sc dtd}{\small s}\xspace}
+\newcommand{\SQL}{{\sc sql}\xspace}
+\newcommand{\SQLU}{{\sc sqlu}\xspace}
+\newcommand{\XSLT}{{\sc xslt}\xspace}
+\newcommand{\DBMS}{{\sc dbms}\xspace}
+\newcommand{\ATG}{{\sc atg}\xspace}
+\newcommand{\ATGs}{{\sc atg}{\small s}\xspace}
+\newcommand{\EBI}{{\sc ebi}\xspace}
+\newcommand{\GO}{{\sc go}\xspace}
+\newcommand{\VEC}[1]{{\sc vec}(#1)}
+\newcommand{\DAG}{{\small DAG}\xspace}
+\newcommand{\SCC}{{\small SCC}\xspace}
+\newcommand{\SCCs}{{\small SCC}s\xspace}
+\newcommand{\XQ}{{\sc xq}\xspace}
+\newcommand{\XQwc}{{\sc xq}$^{\scriptscriptstyle[*]}$\xspace}
+\newcommand{\XQdes}{{\sc xq}$^{\scriptscriptstyle[//]}$\xspace}
+\newcommand{\XQfull}{{\sc xq}$^{\scriptscriptstyle[*,//]}$\xspace}
+\newcommand{\SPARQL}{{\sc sparql}\xspace}
+\newcommand{\vect}[1]{$\langle$ #1 $\rangle$}
+\newcommand{\sem}[1]{[\![#1]\!]}
+\newcommand{\NN}[2]{#1\sem{#2}}
+\newcommand{\e}[2]{{\mathit (#1,#2)}}
+\newcommand{\ep}[2]{{\mathit (#1,#2)+}}
+\newcommand{\brname}{\ensuremath{{\mathsf{N}}}}
+\newcommand{\budrel}[1]{\ensuremath{{\brname_{#1}}}}
+\newcommand{\budgen}[2]{\ensuremath{Q^\brname_\e{#1}{#2}}}
+\newcommand{\budcut}[2]{\ensuremath{Q_\e{#1}{#2}}}
+\newcommand{\eop}{\hspace*{\fill}\mbox{$\Box$}\vspace{1ex}}     % End of proof
+
+\newcounter{example}
+\renewcommand{\theexample}{\arabic{example}}
+\newenvironment{example}{
+        \vspace{1ex}
+        \refstepcounter{example}
+        {\noindent\bf Example \theexample:}}{
+        \eop}
+
+% \def\copyrightspace{}
+% \renewcommand{\ni}{\noindent}
+% \newcommand{\comlore}[1]{\begin{minipage}{3in}\fbox{\fbox{\parbox[t]{3in}{{\vspace{2mm}\noindent \bf COMM(LORE):~
+% { #1}\hfill  END.}}}}\end{minipage}\\}
+% \newcommand{\comwenfei}[1]{\begin{minipage}{3in}\fbox{\fbox{\parbox[t]{3in}{{\vspace{2mm}\noindent \bf COMM(WENFEI):~
+% { #1}\hfill  END.}}}}\end{minipage}\\}
+% \newcommand{\comshuai}[1]{\begin{minipage}{3in}\fbox{\fbox{\parbox[t]{3in}{{\vspace{2mm}\noindent \bf COMM(SHUAI):~
+% { #1}\hfill  END.}}}}\end{minipage}\\}
+
+\newcommand{\nthesection}{\arabic{section}}
+%\newcounter{theorem}%[section]
+%\renewcommand{\thetheorem}{\arabic{theorem}}
+%\newcounter{prop}[section]
+%\renewcommand{\theprop}{\nthesection.\arabic{theorem}}
+%\newcounter{lemma}[section]
+%\renewcommand{\thelemma}{\nthesection.\arabic{theorem}}
+%\newcounter{cor}
+%\renewcommand{\thecor}{\arabic{theorem}}
+%\newenvironment{theorem}{\begin{em}
+%        \refstepcounter{theorem}
+%        {\vspace{1ex} \noindent\bf  Theorem  \thetheorem:}}{
+%        \end{em}\eop} %\hspace*{\fill}\vspace*{1ex}}
+%\newenvironment{prop}{\begin{em}
+%        \refstepcounter{theorem}
+%        {\vspace{1ex}\noindent \bf Proposition \thetheorem:}}{
+%        \end{em}\eop}%\hspace*{\fill}\vspace*{1ex}}
+%\newenvironment{lemma}{\begin{em}
+%        \refstepcounter{theorem}
+%        {\vspace{1ex}\noindent\bf Lemma \thelemma:}}{
+%        \end{em}\eop} %\hspace*{\fill}\vspace*{1ex}}
+%\newenvironment{cor}{\begin{em}
+%        \refstepcounter{theorem}
+%        {\vspace{1ex}\noindent\bf Corollary \thecor:}}{
+%        \end{em}\eop} %\hspace*{\fill}\vspace*{1ex}}
+%
+
+%\newcounter{definition}[section]
+%%\renewcommand{\thedefinition}{\nthesection.\arabic{definition}}
+%\newcommand{\thedefinition}{\arabic{definition}}
+%\newenvironment{definition}{
+%        \vspace{1ex}
+%        \refstepcounter{definition}
+%        {\noindent\bf Definition {\bf \thedefinition}:}}{\eop
+%}
+
+\newenvironment{ctheorem}[1]{\begin{em}
+        \refstepcounter{theorem}
+        {\vspace{1ex}\noindent\bf  Theorem  {\bf \thetheorem} #1: }}{
+        \end{em}\eop}
+
+\newcounter{alg}[section]
+\renewcommand{\thealg}{\nthesection.\arabic{alg}}
+\newenvironment{alg}[1]{
+        \refstepcounter{alg}
+        {\vspace{1ex}\noindent\bf Algorithm \thealg:\, #1}}{
+        \vspace*{1ex}}
+\newcounter{arule}
+\renewcommand{\thearule}{\arabic{arule}}
+\newenvironment{arule}{
+        \vspace{0.6ex}
+        \refstepcounter{arule}
+        {\noindent \em Rule \thearule:}}{
+        }
+\newcounter{claim}
+\renewcommand{\theclaim}{\arabic{claim}}
+\newenvironment{claim}{
+        \vspace{0.6ex}
+        \refstepcounter{claim}
+        {\noindent\em Claim \theclaim:}}{
+        }
+
+% \renewenvironment{proof}{
+%        \vspace{0.5ex}
+%        {\noindent\bf Proof:}}{\eop\vspace{1ex}}
+\newenvironment{proofS}{
+        \vspace{1ex}
+        {\noindent\bf Proof sketch:\ }}{\eop\vspace{1ex}}
+
+\makeatletter
+    \newcommand\figcaption{\def\@captype{figure}\caption}
+    \newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother
+
+\newcommand{\bluefont}[1]{{\color{blue} #1}}
+\newcommand{\strong}[1]{ \textbf{\textit{#1}} }
+	
+\newcommand{\reminder}[1]{ {\mbox{$<==$}} [[[ \bluefont{ \bf #1 } ]]] {\mbox{$==>$}}}
+
+\newcommand{\mycirc}[1][black]{\Large\textcolor{#1}{\ensuremath\bullet}}
+
+
+\newcommand{\annotate}[1]{\textcolor{black!60}{#1}}
+\newcommand{\nan}[1]{\textcolor{blue}{Nan: #1}}
+\newcommand{\mourad}[1]{\footnote{\textcolor{blue}{Mourad: #1}}}
+\newcommand{\hakim}[1]{{\textcolor{blue}{Hakim: #1}}}
+
+\newcommand{\answer}{\stab {\bf [A]}~}
+\newcommand{\comments}[1]{\vspace*{1.5ex}\stab\textit{#1}}
+
+
+
+\newcommand\Vtextvisiblespace[1][.3em]{%
+  \mbox{\kern.06em\vrule height.3ex}%
+  \vbox{\hrule width#1}%
+  \hbox{\vrule height.3ex}}
+
+\definecolor{shadecolor}{RGB}{220,220,220}
+\newcommand{\mybox}[1]{\vspace{1.5ex}\par\noindent\colorbox{shadecolor}
+	{\parbox{\dimexpr\columnwidth-2\fboxsep\relax}{#1}}\vspace{1.5ex}}
+	
+
+\tikzstyle{mybox} = [draw=black, fill=black!5, thick,
+    rectangle, rounded corners, inner sep=0pt, inner ysep=6pt]
+\tikzstyle{fancytitle} =[fill=black, text=white]
+
+
+
+
+
+\newcommand*\I{\mathcal{I}}
+\newcommand*\yang[1]{{\color{red!90!black}#1}}
+\usepackage{stackengine}
+\newcommand*\letvdash[1]{\mathrel{
+  \stackengine{1ex}{\vdash}{\;\;\scriptscriptstyle#1}{O}{c}{F}{T}{L}}}
+\stackMath
+
+\renewcommand*\H{\mathcal{H}}
+\newcommand*\eetitle{\etitle}
+\usepackage{mathtools}
+\newcommand*\ak{\allowbreak}
+
+
+
+
+
+\newcounter{theorem}%[section]
+\renewcommand{\thetheorem}{\arabic{theorem}}
+\newenvironment{theorem}{\begin{em}
+        \refstepcounter{theorem}
+        {\vspace{1ex} \noindent\bf  Theorem  \thetheorem:}}{
+        \end{em}\eop\vspace{1ex}} %\hspace*{\fill}\vspace*{1ex}}
+
+
+\newcommand*\revise[1]{{{#1}}}
+%\renewcommand*\revise[1]{{#1}}
+
