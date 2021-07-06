@@ -1,0 +1,67 @@
+%!TEX root = ../COSCFair.tex
+
+\section{Evaluation}\label{sec:eval}
+
+This section provides information regarding datasets and baseline methods used, and the numerical results obtained from the conducted experiments to evaluate the performance of the COSCFair framework in terms of fairness and predictive accuracy. Our focus in the experiments is on improving the DI Ratio, DP Difference, and AEO Difference while having minimal or no loss in other fairness and performance metrics.
+
+\subsection{Datasets} \label{ssec:dfs}
+
+We have used three datasets that are widely used in the fairness domain to evaluate the bias mitigation performance and prediction capability. We have chosen the German Credit dataset as a representative of small datasets and UCI Adult dataset as a representative of relatively large datasets, which are obtained from the UCI Machine Learning Repository \cite{UCIdfs} while the COMPAS dataset it obtained from ProPublica Data Store \footnote{https://www.propublica.org/datastore/dataset/compas-recidivism-risk-score-data-and-analysis}. "Charge description" column in the COMPAS dataset and "native country" column in the Adult dataset is removed to reduce the dimensionality of the datasets after one-hot encoding the categorical variables.
+
+All the datasets contain two binary sensitive attributes and a binary decision label in our experiments. The details regarding each dataset can be found in Table \ref{Table1}. The favorable sensitive values define the privileged and the unprivileged subgroups in the datasets. For example, while Caucasian males are the most privileged subgroups, African-American females are considered the most unprivileged subgroups in the Adult dataset. The people in-between these subgroups who are having a privileged value in one of the sensitive attributes can be considered privileged or unprivileged depending on the dataset. However, the bias between each of these subgroups should be investigated. The detailed results regarding the bias comparison of all these subgroups can be found in Table \ref{Table5}.
+
+\subsection{Baseline Methods}\label{ssec:baselines}
+
+Our COSCFair framework is compared to three different baseline methods in the experiments. The first baseline is a standard logistic regression algorithm with no bias mitigation. The second one is a pre-processing technique, which is the Learning Fair Representations (LFR) from \citeauthor{zemel2013fair_learning} \cite{zemel2013fair_learning}. Finally, the third baseline is an in-processing technique, which is the Adversarial Debiasing, introduced by  \citeauthor{zhang2018adversarial} \cite{zhang2018adversarial}. The outcome of LFR is trained with logistic regression classifier, while Adversarial Debiasing already contains the logistic regression classifier within itself. Thus, we have also used logistic regression (COSCFairLR) to compare our solution on an equal ground with the other baselines. Finally we have also added our recommended framework with random forest classifier (COSCFair) to show that our framework can be improved further by using a different classifier to achieve better results.
+
+
+\input{Sections/Tables/Table1}
+
+
+
+
+\subsection{Experimental Setup}\label{sscec:expers}
+
+We have implemented our framework in Python and imported AIF360 library \footnote{https://github.com/Trusted-AI/AIF360} to execute the baseline methods, which are Learning Fair Representations (LFR) and Adversarial Debiasing (Adv Deb), in our experiments. We have collected all of the fairness and performance metrics explained in Section \ref{sec:theory} to evaluate the results. We have conducted three main experiments in total. For all of the experiments, each technique is run ten times with the randomized training and test set split per dataset and then the results are averaged. It is important to note that none of the classifiers in our experiments are fine-tuned for the most optimal predictions, instead, the standard versions of these classifiers are used with no predefined or customized hyper-parameters to provide equality in the experiments.
+
+
+In the first experiment, three different strategies that can be implemented with COSCFair framework are compared with each other for all datasets to find the most optimal strategy (see Table \ref{Table4}). The most unprivileged (attr1: 0, attr2: 0) and privileged (attr1: 1, attr2: 1) subgroups are used to calculate the metrics in this experiment. The performance of the classifiers per strategy are also compared to find the most suitable classification algorithm for our framework. 
+
+
+\input{Sections/Tables/Table4}
+
+\input{Sections/Tables/Table6}
+
+
+In the second experiment, every possible subgroup combination as privileged and unprivileged groups is compared with each other to investigate the improvement in fairness metrics between these subgroups. In the experiment, only the subgroups having a favorable value for both sensitive attributes (attr1: 1, attr2: 1) are always privileged, and the subgroups having an unfavorable value for both sensitive attributes (attr1: 0, attr2: 0) are always unprivileged for the comparisons. The other subgroups can be compared as both privileged and unprivileged groups in the experiments (see Table \ref{Table5}). We have extended this experiment by investigating how the number of positive and negative predictions change per subgroup when we use COSCFair. An exemplary result of this investigation can be found in Table \ref{Table6}.
+
+In the third experiment, all the baseline techniques are compared with two variations of our framework(COSCFairLR, COSCFair) based on all the datasets mentioned in Section \ref{ssec:dfs}. All the fairness metrics are calculated also by comparing the most unprivileged (attr1: 0, attr2: 0) and privileged (attr1: 1, attr2: 1) subgroups in this experiment. In order to achieve further insights on how different classifiers affect the performance of these techniques logistic regression, random forest, and gradient boosting classifiers are used and their results are compared per technique (see Table \ref{Table3}).
+
+
+
+
+\input{Sections/Tables/Table5}
+
+\input{Sections/Tables/Table3}
+
+
+
+%------------------------------------------------
+
+
+\subsection{Results and Analysis}\label{ssec:results}
+
+\stitle{Experiment1:} The averaged results on all datasets with different classifiers show that the third strategy (COSCFair3) performs the best among other strategies in both achieving a high DI Ratio and causing the minimal loss in performance metrics among other strategies (see the results with German dataset on Table \ref{Table4}). 
+Even though it looks like Random Forest classifier is not the best combination with COSCFair3 according to Table \ref{Table4}, it is the most consistent classifier with our framework in terms of providing high fairness scores (AEO Difference, DI Ratio, and DP Difference) while not causing a significant trade-off in other fairness and performance metrics when all of the experimented datasets are considered. 
+Thus, we recommend our framework to be used with the COSCFair3 strategy and Random Forest classifier. We have also added this recommended setup next to the variation with Logistic Regression classifier (COSCFairLR) in Table \ref{Table3} to show its superiority in most of the cases.
+
+\stitle{Experiment2:} The results of using COSCFair with Random Forest classifier on German dataset show that all the AEO Differences are lower than 0.06, all the DI Ratios are above the threshold of 0.8, and all the DP Differences are also smaller than 0.1, which means that COSCFair provided fairness satisfactorily in this dataset for all possible combinations of privileged and unprivileged subgroups. Having values greater than 1.0 in DI Ratio means that the subgroup considered as the unprivileged group is actually more privileged than the subgroup considered as the privileged group in the equation. For example, in Table \ref{Table5}, the DI Ratio on the second row is 1.119, which means that the subgroup "age:1, sex:0" is more privileged than the subgroup "age:0, sex:1". However, since the value is smaller than 1.2, it is still considered as satisfactorily fair. The detailed investigation regarding the effect of COSCFair on the number of positive and negative predictions per subgroup reveals that COSCFair ensures fairness by decreasing the positive predictions while increasing the negative predictions for the privileged group(s), and by increasing the positive predictions while decreasing the negative predictions for the unprivileged group(s) compared to the predictions without any bias mitigation, which is shown in Table \ref{Table6}.
+
+\stitle{Experiment3:} The results indicate that our COSCFair framework with the third strategy successfully decreases the AEO Difference, DP Difference, while increasing the DI Ratio consistently. Depending on the severeness of the bias in the dataset, DI Ratio does not always reach the minimum threshold, which is 0.8. However, our solutions outperform the other baselines in most of the cases in terms of both AEO Difference and DI Ratio, which can be seen in Table \ref{Table3}. Only in the Adult dataset, LFR outperforms the COSCFairLR variant in DI Ratio with two percent. Furthermore, especially the COSCFair framework, which uses the Random Forest classifier, yields the minimum loss when all of the performance metrics in the experiments are compared to other mitigation techniques (LFR and Adversarial Debiasing) in most cases. It is found that the other baselines perform better at achieving a higher Consistency score, although our framework does not cause a significant decrease in this score, which is not more than a 0.1 decrease in most of the cases. The standard deviation scores reveal that our results in different randomized runs provide consistently similar improvements in results compared to other baseline mitigation techniques. It should be noted that Adversarial debiasing algorithm has a significantly low score of 0,88 in DI Ratio because it could not predict any positive outcomes for the unprivileged subgroup in several runs.
+
+
+
+
+
+
+
