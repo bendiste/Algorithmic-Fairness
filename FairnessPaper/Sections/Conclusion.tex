@@ -1,0 +1,9 @@
+%!TEX root = ../COSCFair.tex
+
+\section{Conclusion} \label{sec:conclusion}
+
+We approached the bias problem in ML as an imbalanced dataset problem, where there is an unequal representation of different subgroups in terms of positive and negative outcomes in datasets. We proposed the COSCFair framework, which is a bias mitigation technique that has a minimum explicit intervention to the machine learning pipeline since it changes neither the original class labels of a dataset, nor any classification algorithm's training structure. Our solution provides consistent improvements in achieving higher fairness metrics among different subgroups while not giving up on classifier performance significantly, which is highly competitive with other solutions in the literature. COSCFair is a flexible framework because it can easily be integrated with different clustering, oversampling, and classification algorithms to find a customized solution that works best with a given dataset.
+
+% \section{Directions for Future Work}
+
+There are several directions to be investigated further to improve the COSCFair framework. One of these directions is investigating the effects of different oversampling techniques and the quality of synthetic samples on the fairness and performance metrics. Achieving higher quality or more realistic synthetic samples might improve the results in fairness metrics further while preserving high values in performance metrics. Another important direction is studying the cases where the sensitive attributes are not binary and the cases where there are more than two sensitive attributes further to investigate the effect of higher complexity on our framework due to having more subgroups and more unprivileged-privileged group comparison.
