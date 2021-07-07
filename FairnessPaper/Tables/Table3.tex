@@ -1,0 +1,34 @@
+%!TEX root = ../COSCFair.tex
+\begin{table*}[h!]
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\resizebox{0.89\textwidth}{!}{\begin{minipage}{\textwidth}
+\setlength{\parindent}{-0.98cm}
+\begin{tabular}{|c|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Datasets}} & \textbf{Technique}                 & \textbf{AEO Diff.}     & \textbf{DI Ratio}     & \textbf{DP Diff.}      & \textbf{PP Diff.}      & \textbf{Consistency}  & \textbf{Accuracy}     & \textbf{Balan. Acc.}  & \textbf{F1 Score}     \\ \hline
+                                        & Original DF                        & -                      & 0.748                 & -0.186                 & -                      & 0.682                 & -                     & -                     & -                     \\ \cline{2-10} 
+                                        & LR                                 & -0.252/ 0.089          & 0.631/ 0.104          & -0.311/ 0.087          & -0.064/ 0.062          & 0.835/ 0.017          & \textbf{0.759/ 0.016} & \textbf{0.675/ 0.017} & \textbf{0.837/ 0.013} \\ \cline{2-10} 
+                                        & LFR                                & -0.123/ 0.203          & 0.764/ 0.249          & -0.159/ 0.208          & -0.154/ 0.138          & \textbf{0.985/ 0.011} & 0.650/ 0.041          & 0.582/ 0.050          & 0.745/ 0.058          \\ \cline{2-10} 
+                                        & Adv. Deb.                          & -0.362/ 0.38           & 0.570/ 0.259          & -0.352/ 0.365          & \textbf{-0.041/ 0.147} & 0.983/ 0.009          & 0.683/ 0.034          & 0.540/ 0.02           & 0.798/ 0.031          \\ \cline{2-10} 
+                                        & \cellcolor[HTML]{D9D9D9}COSCFairLR & -0.045/ 0.074          & 0.837/ 0.085          & -0.110/ 0.073          & -0.126/ 0.062          & 0.749/ 0.016          & 0.699/ 0.022          & 0.672/ 0.019          & 0.774/ 0.022          \\ \cline{2-10} 
+\multirow{-6}{*}{\textbf{German}}       & \cellcolor[HTML]{D9D9D9}COSCFair   & \textbf{-0.022/ 0.072} & \textbf{0.914/ 0.068} & \textbf{-0.072/ 0.056} & -0.139/ 0.068          & 0.803/ 0.017          & 0.743/ 0.017          & 0.653/ 0.021          & 0.827/ 0.012          \\ \hline
+                                        & Original DF                        & -                      & 0.235                 & -0.248                 & -                      & 0.848                 & -                     & -                     & -                     \\ \cline{2-10} 
+                                        & LR                                 & -0.260/ 0.041          & 0.248/ 0.027          & -0.489/ 0.019          & \textbf{-0.010/ 0.026} & 0.937/ 0.002          & \textbf{0.816/ 0.002} & \textbf{0.816/ 0.002} & \textbf{0.821/ 0.002} \\ \cline{2-10} 
+                                        & LFR                                & -0.087/ 0.245          & \textbf{0.463/ 0.278} & \textbf{-0.201/ 0.225} & -0.272/ 0.149          & \textbf{0.975/ 0.017} & 0.720/ 0.135          & 0.688/ 0.066          & 0.520/ 0.085          \\ \cline{2-10} 
+                                        & Adv. Deb.                          & -0.238/ 0.064          & 0.088/ 0.115          & -0.203/ 0.025          & -0.536/ 0.155          & 0.999/ 0              & 0.794/ 0.003          & 0.673/ 0.004          & 0.506/ 0.008          \\ \cline{2-10} 
+                                        & \cellcolor[HTML]{D9D9D9}COSCFairLR & \textbf{-0.060/ 0.027} & 0.441/ 0.035          & -0.307/ 0.019          & -0.158/ 0.039          & 0.904/ 0.004          & 0.769/ 0.005          & 0.769/ 0.005          & 0.766/ 0.007          \\ \cline{2-10} 
+\multirow{-6}{*}{\textbf{Adult}}        & \cellcolor[HTML]{D9D9D9}COSCFair   & -0.126/ 0.018          & 0.370/ 0.025          & -0.365/ 0.016          & -0.139/ 0.048          & 0.845/ 0.005          & 0.794/ 0.006          & 0.794/ 0.006          & 0.793/ 0.007          \\ \hline
+                                        & Original DF                        & -                      & 0.688                 & -0.201                 & -                      & 0.675                 & -                     & -                     & -                     \\ \cline{2-10} 
+                                        & LR                                 & -0.481/ 0.046          & 0.429/ 0.027          & -0.522/ 0.041          & \textbf{-0.035/ 0.025} & 0.967/ 0.002          & \textbf{0.677/ 0.006} & \textbf{0.673/ 0.007} & \textbf{0.710/ 0.007} \\ \cline{2-10} 
+                                        & LFR                                & -0.270 / 0.101         & 0.641/ 0.116          & -0.249/ 0.107          & -0.082/ 0.057          & \textbf{0.999/ 0.001} & 0.647/ 0.023          & 0.644/ 0.019          & 0.666/ 0.067          \\ \cline{2-10} 
+                                        & Adv. Deb.                          & -0.485/ 0.072          & 0.420/ 0.068          & -0.525/ 0.068          & -0.044/ 0.0428         & 0.998/ 0.001          & 0.664/ 0.015          & 0.660/ 0.014          & 0.696/ 0.019          \\ \cline{2-10} 
+                                        & \cellcolor[HTML]{D9D9D9}COSCFairLR & -0.176/ 0.031          & 0.614/ 0.031          & -0.228/ 0.025          & -0.162/ 0.045          & 0.938/ 0.007          & 0.623/ 0.014          & 0.627/ 0.014          & 0.614/ 0.018          \\ \cline{2-10} 
+\multirow{-6}{*}{\textbf{COMPAS}}       & \cellcolor[HTML]{D9D9D9}COSCFair   & \textbf{-0.151/ 0.034} & \textbf{0.712/ 0.033} & \textbf{-0.197/ 0.031} & -0.150/ 0.018          & 0.796/ 0.012          & 0.627/ 0.012          & 0.625/ 0.011          & 0.657/ 0.016          \\ \hline
+\end{tabular}
+\end{minipage}}
+\caption{\label{Table3} The comparison of the original dataset, results of the baseline logistic regression (LR), other baseline mitigation techniques (LFR, Adv Deb), our framework trained with logistic regression (COSCFairLR), and trained with random forest classifier (COSCFair). Both LFR and Adv Deb uses logistic regression as the classifier algorithm in order to provide an equal ground to compare the results. The values on the left side of each cell show the average of ten runs, while the values on the right side give the standard deviation of these ten runs.}
+\vskip -0.2in
+\end{table*}
