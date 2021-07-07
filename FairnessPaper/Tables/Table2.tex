@@ -1,0 +1,15 @@
+%!TEX root = ../COSCFair.tex
+
+\begin{table*}[h!]
+\begin{tabular}{|c|l|l|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Datasets}} & \multicolumn{3}{c|}{\textbf{German}}                                                                                 & \multicolumn{3}{c|}{\textbf{Adult}}                                                                                  & \multicolumn{3}{c|}{\textbf{COMPAS}}                                                                                 \\ \hline
+\multicolumn{1}{|l|}{\textbf{Ratios}}   & \multicolumn{1}{c|}{\textbf{Base}} & \multicolumn{1}{c|}{\textbf{Positive}} & \multicolumn{1}{c|}{\textbf{Negative}} & \multicolumn{1}{c|}{\textbf{Base}} & \multicolumn{1}{c|}{\textbf{Positive}} & \multicolumn{1}{c|}{\textbf{Negative}} & \multicolumn{1}{c|}{\textbf{Base}} & \multicolumn{1}{c|}{\textbf{Positive}} & \multicolumn{1}{c|}{\textbf{Negative}} \\ \hline
+attr1: 0, attr2: 0                      & 0.105                              & 0.058                                  & 0.047                                  & 0.048                              & 0.010                                  & 0.039                                  & 0.498                              & 0.221                                  & 0.277                                  \\ \hline
+attr1: 1, attr2: 0                      & 0.205                              & 0.143                                  & 0.062                                  & 0.217                              & 0.065                                  & 0.152                                  & 0.307                              & 0.184                                  & 0.124                                  \\ \hline
+attr1: 0, attr2: 1                      & 0.085                              & 0.052                                  & 0.033                                  & 0.075                              & 0.035                                  & 0.040                                  & 0.104                              & 0.066                                  & 0.038                                  \\ \hline
+attr1: 1, attr2: 1                      & 0.605                              & 0.447                                  & 0.158                                  & 0.660                              & 0.390                                  & 0.269                                  & 0.091                              & 0.059                                  & 0.032                                  \\ \hline
+\end{tabular}
+\caption{\label{Table2} The ratios of the demographic subgroups existing in each dataset, together with the ratios of the positive and the negative class labels that subgroup has. The names "attr1" and "attr2" correspond to the sensitive attributes each dataset contains in order (see Table \ref{Table1}), the labels 0 and 1 represent the unprivileged and the privileged groups of a given sensitive attribute respectively.}
+\vskip -0.2in
+\end{table*}
