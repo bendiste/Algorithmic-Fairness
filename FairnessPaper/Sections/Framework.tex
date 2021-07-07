@@ -27,7 +27,7 @@ After splitting the training set into cluster sets using the cluster memberships
 
 The main reason why oversampling is used to mitigate bias is because most of the datasets containing bias are actually imbalanced, where different subgroups are not represented equally in terms of number of positive and negative samples per subgroup. This problem can easily be spotted on Table \ref{Table2} in all of the datasets. The most privileged subgroups have the most number of samples in German and Adult datasets, in which of these samples have more positive class labeled samples than other subgroups. This situation is different in COMPAS dataset, where the most privileged group has the least number of samples while the most unprivileged group has the most. However, it is important to note that while all other subgroups have more positive labeled samples, the most unprivileged group has more negative labeled sentences, which is still an imbalance problem that requires oversampling for equal representation of each subgroup with both positive and negative outcomes. 
 
-\input{Sections/Tables/Table2}
+\input{Tables/Table2}
 
 \subsection{Classification}\label{ssec:str_classf}
 
