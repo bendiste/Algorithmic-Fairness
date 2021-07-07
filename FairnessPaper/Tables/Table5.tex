@@ -1,0 +1,36 @@
+%!TEX root = ../COSCFair.tex
+
+\begin{table}[t]
+\begin{small}
+\resizebox{0.86\textwidth}{!}{\begin{minipage}{\textwidth}
+\begin{tabular}{|c|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Subgroups ($G$ vs $G'$)}} & \textbf{AEO Diff.} & \textbf{DI Ratio} & \textbf{DP Diff.} & \textbf{PP Diff.} & \textbf{Cons.} \\ \hline
+\textbf{A: 0, S: 0 vs A: 1, S: 0}          & 0.021             & 0.95             & -0.04           & -0.15           & 0.80                \\ \hline
+\textbf{A: 1, S: 0 vs A: 0, S: 1}          & 0.02             & 1.20             & 0.067            & 0.10            & 0.80                \\ \hline
+\textbf{A: 0, S: 1 vs A: 1, S: 1}          & -0.06            & 0.89             & -0.10           & -0.10           & 0.80                \\ \hline
+\textbf{A: 0, S: 0 vs A: 0, S: 1}          & 0.04             & 1.06             & 0.02            & -0.05           & 0.80                \\ \hline
+\textbf{A: 1, S: 0 vs A: 1, S: 1}          & -0.04            & 0.97             & -0.03           & 0.00            & 0.80                \\ \hline
+\textbf{A: 0, S: 0 vs A: 1, S: 1}          & -0.02            & 0.91             & -0.07           & -0.15           & 0.80                \\ \hline
+\end{tabular}
+\end{minipage}}
+\caption{\label{Table5} Detailed results obtained from COCSFair with Random Forest classifier per unprivileged (\textit{G}) and privileged (\textit{G'}) subgroup comparison. Sensitive attribute (A = age and S = sex). The results are calculated using the German dataset. The performance metrics of this result are on Table \ref{Table4} (Random Forest classifier with COSCFair3).}
+\end{small}
+\vskip -0.3in
+\end{table}
+
+
+
+% \begin{table*}[t]
+% \begin{tabular}{|c|l|l|l|l|l|}
+% \hline
+% \multicolumn{1}{|l|}{\textbf{Subgroups (unprivileged vs privileged)}} & \textbf{AEO Diff.} & \textbf{DI Ratio} & \textbf{DP Diff.} & \textbf{PP Diff.} & \textbf{Consistency} \\ \hline
+% \textbf{age: 0, sex: 0 vs age: 1, sex: 0}          & 0.021             & 0.945             & -0.044           & -0.153           & 0.803                \\ \hline
+% \textbf{age: 1, sex: 0 vs age: 0, sex: 1}          & 0.017             & 1.119             & 0.067            & 0.102            & 0.803                \\ \hline
+% \textbf{age: 0, sex: 1 vs age: 1, sex: 1}          & -0.059            & 0.886             & -0.096           & -0.101           & 0.803                \\ \hline
+% \textbf{age: 0, sex: 0 vs age: 0, sex: 1}          & 0.037             & 1.058             & 0.024            & -0.051           & 0.803                \\ \hline
+% \textbf{age: 1, sex: 0 vs age: 1, sex: 1}          & -0.042            & 0.967             & -0.028           & 0.000            & 0.803                \\ \hline
+% \textbf{age: 0, sex: 0 vs age: 1, sex: 1}          & -0.022            & 0.914             & -0.072           & -0.152           & 0.803                \\ \hline
+% \end{tabular}
+% \caption{\label{Table5} Detailed results obtained from COCSFair with Random Forest classifier per unprivileged and privileged subgroup comparison. The results are calculated using the German dataset. The performance metrics of this result are on Table \ref{Table4} (Random Forest classifier with COSCFair3).}
+% \end{table*}
