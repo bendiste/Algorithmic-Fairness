@@ -1,0 +1,17 @@
+%!TEX root = ../COSCFair.tex
+
+\begin{table}[h!]
+
+\begin{tabular}{|c|l|l|l|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Technique}} & \multicolumn{3}{c|}{\textbf{RF w/o Mitigation}}                                                            & \multicolumn{3}{c|}{\textbf{RF with COSCFair}}                                                             \\ \hline
+\multicolumn{1}{|l|}{\textbf{Ratios}}    & \multicolumn{1}{c|}{\textbf{Base}} & \multicolumn{1}{c|}{\textbf{Pos}} & \multicolumn{1}{c|}{\textbf{Neg}} & \multicolumn{1}{c|}{\textbf{Base}} & \multicolumn{1}{c|}{\textbf{Pos}} & \multicolumn{1}{c|}{\textbf{Neg}} \\ \hline
+\textbf{age: 0,sex: 0}                   & 0.103                              & 0.071                             & 0.032                             & 0.103                              & 0.076                             & 0.027                             \\ \hline
+\textbf{age: 1, sex: 0}                  & 0.207                              & 0.166                             & 0.040                             & 0.207                              & 0.161                             & 0.046                             \\ \hline
+\textbf{age: 0, sex: 1}                  & 0.087                              & 0.066                             & 0.021                             & 0.087                              & 0.062                             & 0.025                             \\ \hline
+\textbf{age: 1, sex: 1}                  & 0.603                              & 0.514                             & 0.089                             & 0.603                              & 0.487                             & 0.116                             \\ \hline
+\end{tabular}
+
+\caption{\label{Table6} The changes in the ratios of the positive (Pos) and negative (Neg) outcomes in each demographic subgroups with and without COSCFair to predict the German test set using Random Forest (RF) classifier.}
+\vskip -0.1in
+\end{table}
