@@ -3,7 +3,7 @@
 
 In this section, we explain how the COSCFair framework is constructed and introduce the type of components used to implement each step. Our framework consists of four main steps and components. It starts with pre-processing step for the dataset, where we identify the \textbf{subgroup IDs} of each sample. Then, we apply a clustering algorithm on the training set to discover the natural groups (clusters) it contains, where the samples in each of these groups are closer to each other than the others. The next step is dividing the training set into \textbf{cluster sets}, where the training samples are grouped according to their cluster IDs. Then, we oversample each of these cluster sets based on the subgroup IDs of the samples to achieve an equal number of samples for each subgroup that exists in the cluster. The final step is the classification step, where the classifier training and class label predictions of the test set occur. Here, we have studied three possible strategies for classifier training and label prediction, which are discussed further in Section \ref{ssec:str_classf}. The pseudocode of COSCFair is given in Algorithm \ref{alg1}.
 
-\input{pseudocode.tex}\label{alg1}
+\input{Sections/pseudocode.tex}\label{alg1}
 
 
 \subsection{Data Preparation}\label{ssec:dataprep}
