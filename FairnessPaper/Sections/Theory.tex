@@ -10,7 +10,7 @@ Let $|D|$ represent the cardinality of the dataset $D$. We assume, without loss 
 We use $G/G'$ to represent the values of unprivileged/privileged group, respectively. 
 Let $\widehat{Y}$ be the set of predicted outcomes derived by a classifier from the dataset $T$. In order to deem the predictions of a classifier trained with a dataset \emph{D} fair as well as satisfactorily accurate, we consider a set of fairness metrics $F =\left\{F_{m_{1}}, F_{m_{2}}, \dots, F_{m_{k}}  \right\}$ and a set of prediction performance metrics $A =\left\{A_{m_{1}}, A_{m_{2}}, \dots, A_{m_{l}}  \right\}$ that needs to be satisfied. In this paper, twe consider five fairness metrics $F =\left\{F_{m_{i}}, 1 \le i \le 5 \right\}$, which are \emph{demographic parity, disparate impact, equalized odds, predictive parity}, and \emph{consistency}. We also consider three prediction performance metrics $A =\left\{A_{m_{1}}, A_{m_{2}}, A_{m_{3}} \right\}$, which refer to \emph{accuracy, balanced accuracy} and \emph{F1-Score}. Our goal is to increase the values of the fairness metrics while minimizing the effects on the performance metrics. Table~\ref{tab:notation} explains the notations used in this section. 
 
-\input{Sections/Tables/notations}
+\input{Tables/notations}
 
 In the rest of this section, we discuss the fairness metrics and perform a theoretical analysis to improve the fairness in the predictions of a given classifier. We provide formal definitions of the fairness metrics with more details than our discussion in Section \ref{sec:related}. 
 
