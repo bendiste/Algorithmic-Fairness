@@ -1,0 +1,78 @@
+%!TEX root = ../COSCFair.tex
+
+% \begin{algorithm}
+%     \caption{COSCFair}
+%     \begin{flushleft}
+%     \textbf{Input:} data $D = \{x_1,...,x_n\}$, train-test split ratio $\rho$, sensitive attributes $S$\\
+%     \noindent\textbf{Output:} Fairness and Performance metrics values.
+%     \end{flushleft}
+% 	\begin{algorithmic}[1]
+% 		\For{each $x \in D$}
+% 	    \State $G_x \leftarrow$ subgroup(x) \annotate{Identify subgroup ID of each sample}
+% 		\EndFor
+% 		\State $A_{G_x}\leftarrow {G_x, \forall x \in D}$ \annotate{Create an attribute for subgroup IDs}
+% 		\State Split the dataset into training and test set
+% 	    \State Cluster the training set
+% 	    \State Split the training set to subsets according to the cluster memberships of samples (cluster sets)
+% 	    \For {Each cluster in cluster sets}
+% 	    \State Oversample cluster set based on the subgroup membership of the samples
+% 		\EndFor
+		
+% 		\If {Strategy == 1}
+% 		\State Concat the oversampled cluster sets
+% 		\EndIf
+% 		\If {Strategy == 2 \textbf{or} Strategy == 3}
+% 		\State Keep the oversampled cluster sets separated
+% 		\EndIf
+		
+% 		\State Train classifier(s) using the training set(s)
+% 		\State Predict\textbf{*} the class labels of the test set 
+		
+% 		\For{subgroup in subgroups}
+% 		\State Calculate fairness and performance metrics per privileged and unprivileged subgroup
+% 		\EndFor
+		
+% 	\end{algorithmic} 
+% \end{algorithm} 
+
+
+
+\begin{algorithm}
+\begin{small}
+    \caption{COSCFair}
+    \begin{flushleft}
+    \textbf{Input:} data $D = \{x_1,...,x_n\}$, train-test split ratio $\rho$, sensitive attributes $S$\\
+    \noindent\textbf{Output:} Fairness and Performance metrics' values.
+    \end{flushleft}
+	\begin{algorithmic}[1]
+		\For{each $x \in D$}
+	    \State $G_x \leftarrow$ subgroup(x, S) \hspace{1ex}\annotate{//Identify subgroup ID of each sample}
+		\EndFor
+		\State $A_{G_x}\leftarrow \{G_x, \forall x \in D\}$ \hspace{2ex}\annotate{//Create an attribute for subgroup IDs}
+		\State $D_{train}, D_{test} \leftarrow Split(D, train, test, \rho)$
+	    \State $C_1, C_2, \dots, C_m \leftarrow Cluster(D_{train})$  \hspace{2ex}\annotate{//find m clusters}
+	   % \State Split the training set to subsets according to the cluster memberships of samples (cluster sets)
+	    \For {Each cluster $C_i$}
+	    \State $C'_i \leftarrow Oversample(C_i)$ \hspace{2ex}\annotate{//based on the subgroups} 
+		\EndFor
+		
+		\If {Strategy == 1}
+		\State $D'_{train}\leftarrow \bigcup_{i=1}^m C'_i$
+		\State Train a model $M$ using $D'_{train}$
+		\EndIf
+		\If {Strategy == 2 \textbf{or} Strategy == 3}
+		    \For { i = 1 to m}
+		        \State train a model $M_i$ using $C'_i$ data
+		    \EndFor
+		\EndIf
+		labels $\leftarrow \{\}$
+		\For {$x \in D_{test}$}
+		\State labels $\leftarrow$ labels $\cup$ \{($x$, class($x$))\}
+		\EndFor
+		\For{subgroup in subgroups}
+		\State Calculate fairness and performance metrics % per privileged and unprivileged subgroup
+		\EndFor
+		
+	\end{algorithmic} 
+\end{small}
+\end{algorithm} 
