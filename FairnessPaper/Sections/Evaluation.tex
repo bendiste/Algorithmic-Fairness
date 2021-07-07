@@ -15,7 +15,7 @@ All the datasets contain two binary sensitive attributes and a binary decision l
 Our COSCFair framework is compared to three different baseline methods in the experiments. The first baseline is a standard logistic regression algorithm with no bias mitigation. The second one is a pre-processing technique, which is the Learning Fair Representations (LFR) from \citeauthor{zemel2013fair_learning} \cite{zemel2013fair_learning}. Finally, the third baseline is an in-processing technique, which is the Adversarial Debiasing, introduced by  \citeauthor{zhang2018adversarial} \cite{zhang2018adversarial}. The outcome of LFR is trained with logistic regression classifier, while Adversarial Debiasing already contains the logistic regression classifier within itself. Thus, we have also used logistic regression (COSCFairLR) to compare our solution on an equal ground with the other baselines. Finally we have also added our recommended framework with random forest classifier (COSCFair) to show that our framework can be improved further by using a different classifier to achieve better results.
 
 
-\input{Sections/Tables/Table1}
+\input{Tables/Table1}
 
 
 
@@ -28,9 +28,9 @@ We have implemented our framework in Python and imported AIF360 library \footnot
 In the first experiment, three different strategies that can be implemented with COSCFair framework are compared with each other for all datasets to find the most optimal strategy (see Table \ref{Table4}). The most unprivileged (attr1: 0, attr2: 0) and privileged (attr1: 1, attr2: 1) subgroups are used to calculate the metrics in this experiment. The performance of the classifiers per strategy are also compared to find the most suitable classification algorithm for our framework. 
 
 
-\input{Sections/Tables/Table4}
+\input{Tables/Table4}
 
-\input{Sections/Tables/Table6}
+\input{Tables/Table6}
 
 
 In the second experiment, every possible subgroup combination as privileged and unprivileged groups is compared with each other to investigate the improvement in fairness metrics between these subgroups. In the experiment, only the subgroups having a favorable value for both sensitive attributes (attr1: 1, attr2: 1) are always privileged, and the subgroups having an unfavorable value for both sensitive attributes (attr1: 0, attr2: 0) are always unprivileged for the comparisons. The other subgroups can be compared as both privileged and unprivileged groups in the experiments (see Table \ref{Table5}). We have extended this experiment by investigating how the number of positive and negative predictions change per subgroup when we use COSCFair. An exemplary result of this investigation can be found in Table \ref{Table6}.
@@ -40,9 +40,9 @@ In the third experiment, all the baseline techniques are compared with two varia
 
 
 
-\input{Sections/Tables/Table5}
+\input{Tables/Table5}
 
-\input{Sections/Tables/Table3}
+\input{Tables/Table3}
 
 
 
