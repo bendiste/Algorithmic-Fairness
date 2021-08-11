@@ -1,4 +1,4 @@
-%!TEX root = main.tex
+%!TEX root = COSCFair.tex
 
 % make the paper wider while keeping the page layout unaffected 
 %\paperwidth=\dimexpr \paperwidth + 0.4cm\relax
@@ -14,7 +14,7 @@
 \usepackage{latexsym}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{amssymb}
+% \usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{colortbl}
 \usepackage{epsfig}
@@ -40,6 +40,14 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage[flushleft]{threeparttable}
+
+
+% \usepackage[numbers]{natbib}
+\def\newblock{\ }%
+\usepackage{enumitem}
+\usepackage{algorithm} 
+\usepackage{algpseudocode} 
+
 
 \usepackage{epsfig}
 \usepackage{multirow}
@@ -133,9 +141,9 @@
 \newcommand{\SET}{\mbox{{\bf set}}\ }
 \newcommand{\IN}{\mbox{{\bf in}}\ }
 \newcommand{\Null}{\mbox{{\it null}}}
-\newcommand{\If}{\mbox{\bf if}\ }
-\newcommand{\Then}{\mbox{\bf then}\ }
-\newcommand{\Else}{\mbox{\bf else}\ }
+% \newcommand{\If}{\mbox{\bf if}\ }
+% \newcommand{\Then}{\mbox{\bf then}\ }
+% \newcommand{\Else}{\mbox{\bf else}\ }
 \newcommand{\To}{\mbox{\bf to}\ }
 \newcommand{\Let}{\mbox{\bf let}\ }
 \newcommand{\Continue}{\mbox{\bf continue}\ }
@@ -147,13 +155,13 @@
 \newcommand{\Do}{\mbox{\bf do}\ }
 \newcommand{\Downto}{\mbox{\bf downto}\ }
 %\newcommand{\Repeat}{\mbox{\bf repeat}\ }
-\newcommand{\Until}{\mbox{\bf until}\ }
-\newcommand{\For}{\mbox{\bf for}\ }
+% \newcommand{\Until}{\mbox{\bf until}\ }
+% \newcommand{\For}{\mbox{\bf for}\ }
 \newcommand{\ForEach}{\mbox{\bf for each}\ }
 %\newcommand{\Or}{\mbox{\bf or}\ }
 \renewcommand{\And}{\mbox{\bf and}\ }
 %\newcommand{\Not}{\mbox{\bf not}\ }
-\newcommand{\Return}{\mbox{\bf return}\ }
+% \newcommand{\Return}{\mbox{\bf return}\ }
 %\newcommand{\Case}{\mbox{\bf case}\ }
 \newcommand{\Of}{\mbox{\bf of}\ }
 \newcommand{\EndCase}{\mbox{\bf end-case}\ }

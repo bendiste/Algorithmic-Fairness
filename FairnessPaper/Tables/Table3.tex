@@ -4,6 +4,7 @@
 % \usepackage{multirow}
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{small}
 \resizebox{0.89\textwidth}{!}{\begin{minipage}{\textwidth}
 \setlength{\parindent}{-0.98cm}
 \begin{tabular}{|c|l|l|l|l|l|l|l|l|l|}
@@ -30,5 +31,6 @@
 \end{tabular}
 \end{minipage}}
 \caption{\label{Table3} The comparison of the original dataset, results of the baseline logistic regression (LR), other baseline mitigation techniques (LFR, Adv Deb), our framework trained with logistic regression (COSCFairLR), and trained with random forest classifier (COSCFair). Both LFR and Adv Deb uses logistic regression as the classifier algorithm in order to provide an equal ground to compare the results. The values on the left side of each cell show the average of ten runs, while the values on the right side give the standard deviation of these ten runs.}
+\end{small}
 \vskip -0.2in
 \end{table*}
