@@ -5,7 +5,10 @@
 
 In this section, we discuss the fairness metrics and perform a theoretical analysis to improve the fairness in the predictions of a given classifier. We provide formal definitions of the fairness metrics with more details than our discussion in Section \ref{sec:related}. 
 
-\subsection{Bias Quantification Measures}
+\subsection{Fairness Measures}
+
+The concept of fairness is vague and can be interpreted in different ways. For that reason, there are multiple fairness measures that are similar in the intent. However, these measures (metrics) differ in the way of treating the protected groups and conflict with each other in some cases. We list here five of the well-known fairness metrics. 
+
 
 \stitle{Demographic Parity (DP):} this metric states that, the instances in both protected (unprivileged) and unprotected (privileged) groups should have equal probability of being predicted as positive outcome. This metric can be applied on the original class labels in a dataset as well as on the classifier predictions. For a dataset to be fair, the following condition must be satisfied:
 \[P\left[Y({\bf x})=1\ |\ S({\bf x})=G' \right]  = P\left[Y({\bf x})=1\ |\ S({\bf x}) = G \right].\] That means, 
@@ -21,11 +24,11 @@ DP_{diff} = &\ P\left[Y({\bf x})=1\ |\ S({\bf x})=G' \right]
 \end{align}
 The same definition can be applied to ensure the classifier's fairness by substituting the original labels by the predicted ones.% in the Equations.  
 
-\stitle{Disparate Impact (DI):} is defined as the ratio between the probability of protected and unprotected groups getting positive or desired outcomes. Based on a legal rule \cite{US_guideline}, a dataset or a classifier is considered fair if its $DI$ ratio is at least 0.8, which is also known as the \emph{80\%-rule}. $DI$ can be formulated as:
+\stitle{Disparate Impact Ratio (DIR):} is defined as the ratio between the probability of protected and unprotected groups getting positive or desired outcomes. Based on a legal rule \cite{US_guideline}, a dataset or a classifier is considered fair if its $DIR$ is at least 0.8, which is also known as the \emph{80\%-rule}. $DIR$ can be formulated as:
 \begin{equation}\label{eq:di}
-DI(D) = \frac{ P\left[({\bf x}) = 1 | S({\bf x}) = G\right]} {P\left[Y({\bf x}) = 1 | S({\bf x})=G'\right]}.
+DIR(D) = \frac{ P\left[({\bf x}) = 1 | S({\bf x}) = G\right]} {P\left[Y({\bf x}) = 1 | S({\bf x})=G'\right]}.
 \end{equation}
-In this research we target increasing the value of $DI$ to be close to or greater than $0.8$. Similar to demographic parity, this metric can also be used to measure the fairness of the classifier's predictions.
+In this research we target increasing the value of $DIR$ to be close to or greater than $0.8$. Similar to demographic parity, this metric can also be used to measure the fairness of the classifier's predictions.
 
 
 \stitle{Equalized Odds (EO):} this metric states that instances from protected and unprotected groups should have equal True Positive Rate (TPR) and False Positive Rate (FPR). 
@@ -50,7 +53,9 @@ According to AEO Diff., a classifier is fair if the $AEO_{diff}$ value should be
 
 \stitle{Predictive Parity:} to deem a classifier as fair in terms of predictive parity, both protected and unprotected groups should have the same positive predictive value. It is formalized as:\\
 \begin{small}
-$P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G\right] = P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G'\right]$.
+\[
+P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G\right] = P\left[Y({\bf x}) = 1\ |\ \widehat{Y}({\bf x})=1, S({\bf x})=G'\right].
+\]
 \end{small}
 
 \stitle{Consistency:} this individual fairness metric measures how similar the labels are for the similar instances in a dataset based on the k-neighbors of the instance. Thus, instances should have the same labels if they are similar in terms of features. This metric is formulated as:
@@ -64,16 +69,17 @@ Consistency = 1 - \frac{1}{|D|}\sum_{i=1}^{|D|} \left| \widehat{y}({\bf x}_i) -
 \]
 where $\left|kNN({\bf x})\right|$ represents the set of closed $k$ neighbors for the kNN computation.
 
+Even though the intention of these definitions of fairness through the different metrics is clear, there is no agreement on what should be considered fair/unfair. For example, for an algorithm to be deemed fair, the equalized odds difference should be close to $0$. However, there is no agreement on the cutoff value to consider the algorithm as fair or not. The only exception is the Disparate Impact Ratio (DIR) which is based on the $80\%$ legal rule. Moreover, it is mathematically impossible to satisfy a set of measures at the same time \cite{chouldechova2017fair,kleinberg2017inherent,pleiss2017calibration}. For these reasons, we focus on how to improve the $DIR$ of a dataset (or the output of a ML algorithm) and how the improvement in the $DIR$ values will affect the other metrics such as accuracy and F1-Score. 
 
-In the rest of this section, we discuss how to improve the $DI$ metric and how the improvement will affect the values of other important metrics such as accuracy and F1-Score. Let $|D|$ be the number of instances in the dataset $D$, $N_p$ %= \# +ve
+Let $|D|$ be the number of instances in the dataset $D$, $N_p$ %= \# +ve
 be the total number positive examples in the dataset, $N_{G_p}/N_{G'_p}$ %  = \# +ve | S = G
-be the number positive examples from the unprivileged/privileged groups, respectively. Let $\xi$ be the percentage value of $DI$ for the original dataset ($DI(D) = \xi/100$). Our goal is to increase the value of $DI$ by $\delta/100$, with $0 < \delta < 125 - \xi $, to make $DI(C)$ close to or greater than $80\%$, where $C$ is a given classifier. To do so, we should increase/decrease the number of instances that are predicted positive from the unprivileged/privileged groups. If $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G) = \frac{N_{G_p}}{N_G}$, and $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G') = \frac{N_{G'_p}}{N_{G'}}$. 
+be the number positive examples from the unprivileged/privileged groups, respectively. Let $\xi$ be the percentage value of $DIR$ for the original dataset ($DIR(D) = \xi/100$). Our goal is to increase the value of $DIR$ by $\delta/100$, with $0 < \delta < 125 - \xi $, to make $DIR(C)$ close to or greater than $80\%$, where $C$ is a given classifier. To do so, we should increase/decrease the number of instances that are predicted positive from the unprivileged/privileged groups. If $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G) = \frac{N_{G_p}}{N_G}$, and $p(Y({\bf x}) = 1\ |\ S({\bf x}) = G') = \frac{N_{G'_p}}{N_{G'}}$. 
 % \fixme{--Hakim: I finished revising the analysis up to this point}
-Since, $DI(D) = \xi\%$ then: 
+Since, $DIR(D) = \xi\%$ then: 
 \begin{equation} \label{eq:NGP}
 \frac{N_{G_p}/{N_G}}{N_{G'_p}/{N_{G'}}} = \frac{\xi}{100}\ \text{and}\ N_{G_p} = \frac{\xi N_G N_{G'_p}}{100N_{G'}}.
 \end{equation}
-To increase the value of $DI(C)$ to $(\xi+\delta)\%$, we need:
+To increase the value of $DIR(C)$ to $(\xi+\delta)\%$, we need:
 \begin{equation}\label{eq:general}
 \frac{\left(N_{G_p}+\epsilon\right)/{N_G}}{\left(N_{G'_p}-\gamma\right)/{N_{G'}}} = \frac{\xi+\delta}{100},
 % \frac{N_G+\epsilon}{W-\omega-\gamma} = \frac{\xi+\delta}{100}.    
@@ -105,10 +111,10 @@ Since the number of instances (records) from the unprivileged group is significa
 To do so, we consider generating more examples from the  unprivileged group with positive label.To do so, we use oversampling technique to generate synthetic data from the class of the minority. Since the synthetic data generator, such as SMOTE~\cite{smote}, interpolates the original instances in the training set to generate new instances, the quality of the generated instances depends on the similarity between the interpolated instances. To increase the similarity between the instances, we cluster the data before generating the new instances. 
 In the evaluation section, we report the number of instances that have been predicted differently due to our solution. 
 
-It should be noted that improving the $DI$ metric will certainly affect the other metrics. For example, according to Eq. (\ref{eq:general}), increasing $DI$ by $\delta$ will have the following effects: i) the number of True Positives (TP) will be decreased by $\gamma$. We assume that we have trained a perfect classifier, which can predict all the labels in the test set correctly. Based on the required changes in the classifier's predictions, if the original true positives is $TP$ then the new true positives $TP'= TP - \gamma$; ii) similarly, the True Negatives will be decreased by $\epsilon$ (i.e. $TN'= TN -\epsilon$); iii) The False Positives (FP) will be increased by $\epsilon$ ($FP'= FP + \epsilon$) and the False Negatives (FN) will be increased by $\gamma$ ($FN'= FN + \gamma$). Thus, the perfect classifier's accuracy will be decreased by $\left(\frac{\gamma+\epsilon}{|D|}\right)$. If $F'_1$ is the new $F1\text{-}Score$, then $F'_1 = \frac{2*(TP-\gamma)}{2*TP+FN+FP+\epsilon-\gamma}$. For the case of perfect classifier, $F_1 = 1$ and $F'_1 = \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$. The decrease in the $F1\text{-}Score$ will be $1 - \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$.
+It should be noted that improving the $DIR$ metric will certainly affect the other metrics. For example, according to Eq. (\ref{eq:general}), increasing $DIR$ by $\delta$ will have the following effects: i) the number of True Positives (TP) will be decreased by $\gamma$. We assume that we have trained a perfect classifier, which can predict all the labels in the test set correctly. Based on the required changes in the classifier's predictions, if the original true positives is $TP$ then the new true positives $TP'= TP - \gamma$; ii) similarly, the True Negatives will be decreased by $\epsilon$ (i.e. $TN'= TN -\epsilon$); iii) The False Positives (FP) will be increased by $\epsilon$ ($FP'= FP + \epsilon$) and the False Negatives (FN) will be increased by $\gamma$ ($FN'= FN + \gamma$). Thus, the perfect classifier's accuracy will be decreased by $\left(\frac{\gamma+\epsilon}{|D|}\right)$. If $F'_1$ is the new $F1\text{-}Score$, then $F'_1 = \frac{2*(TP-\gamma)}{2*TP+FN+FP+\epsilon-\gamma}$. For the case of perfect classifier, $F_1 = 1$ and $F'_1 = \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$. The decrease in the $F1\text{-}Score$ will be $1 - \frac{2(TP-\gamma)}{2TP -\gamma+\epsilon}$.
 
 \begin{example}
-\noindent The German dataset \cite{UCIdfs} has 1000 instances. We split the dataset for training and testing using the 70/30 rule with stratification. In the test set $T$, we have $N_{G'} = 181$ instances from the privileged group and $N_G = 31$ from the unprivileged group. The number of positive instances from privileged/unprivileged is $(N_{G'_p} = 134)$/$(N_{G_p} = 17)$, respectively. In this case, improving $DI(C)$ from $74\%$ to be greater than $80\%$ while considering $\epsilon = 0$ in Eq. (\ref{eq:general}) and assuming that we have a perfect classifier, we will need to predict approximately $10$ instances from the privileged group to be negative instead of their original positive label. In this case, the accuracy of the perfect classifier will decrease by $10/300 = 3.3\%$ and $F1\text{-}Score$ will be reduced by $\frac{10}{2*210-10}= 2.4\%$. However, when $\gamma = 0$, $\epsilon$ will be 2 and the decrease in accuracy and $F1\text{-}Score$ will be $0.6\%$ and $0.5\%$, respectively.
+\noindent The German dataset \cite{UCIdfs} has 1000 instances. We split the dataset for training and testing using the 70/30 rule with stratification. In the test set $T$, we have $N_{G'} = 181$ instances from the privileged group and $N_G = 31$ from the unprivileged group. The number of positive instances from privileged/unprivileged is $(N_{G'_p} = 134)$/$(N_{G_p} = 17)$, respectively. In this case, improving $DIR(C)$ from $74\%$ to be greater than $80\%$ while considering $\epsilon = 0$ in Eq. (\ref{eq:general}) and assuming that we have a perfect classifier, we will need to predict approximately $10$ instances from the privileged group to be negative instead of their original positive label. In this case, the accuracy of the perfect classifier will decrease by $10/300 = 3.3\%$ and $F1\text{-}Score$ will be reduced by $\frac{10}{2*210-10}= 2.4\%$. However, when $\gamma = 0$, $\epsilon$ will be 2 and the decrease in accuracy and $F1\text{-}Score$ will be $0.6\%$ and $0.5\%$, respectively.
 \end{example}
 
 % Based on our analysis and the statistics from the data, we can conclude that the classifier fail to predict more positive instances from the unprivileged group because the number of positive instances in the training set is small compared to the number of positive instances from the privileged group. To solve the problem, we consider generating more examples from the  unprivileged group with positive label.To do so, we use oversampling technique to generate synthetic data from the class of the minority. Since the synthetic data generator, such as SMOTE~\cite{smote}, interpolates the original instances in the training set to generate new instances, the quality of the generated instances depends on the similarity between the interpolated instances. To increase the similarity between the instances, we cluster the data before generating the new instances. 

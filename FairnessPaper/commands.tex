@@ -105,10 +105,10 @@
 %\newcommand{\AND}{\displaystyle{\bigwedge_{i=1}^{m}}}
 %\newcommand{\U}[1]{\displaystyle{\bigcup_{#1}}}
 \newcommand{\Sm}[1]{\displaystyle{\sum_{#1}}}
-\newcommand{\stitle}[1]{\vspace{1ex}\noindent{\bf #1}}
-\newcommand{\ititle}[1]{\vspace{1ex}\noindent{\it #1}}
-\newcommand{\etitle}[1]{\vspace{0.8ex}\noindent{\underline{\em #1}}}
-\newcommand{\betitle}[1]{\vspace{0.8ex}\noindent{\underline{\bf {\em #1}}}}
+\newcommand{\stitle}[1]{\vskip 1ex\noindent{\bf #1}}
+\newcommand{\ititle}[1]{\noindent{\it #1}}
+\newcommand{\etitle}[1]{\noindent{\underline{\em #1}}}
+\newcommand{\betitle}[1]{\noindent{\underline{\bf {\em #1}}}}
 \renewcommand{\t}{\tau}
 \newcommand{\Inh}[1]{\$#1}
 \renewcommand{\r}[1]{{\it rule}(#1)}
@@ -249,7 +249,7 @@
 \newcounter{example}
 \renewcommand{\theexample}{\arabic{example}}
 \newenvironment{example}{
-        \vspace{1ex}
+        \vskip 2ex
         \refstepcounter{example}
         {\noindent\bf Example \theexample:}}{
         \eop}

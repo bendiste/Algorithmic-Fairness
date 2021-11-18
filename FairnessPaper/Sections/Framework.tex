@@ -3,7 +3,7 @@
 
 In this section, we explain how the COSCFair framework is constructed and introduce the type of components used to implement each step. Our framework consists of four main steps and components. It starts with pre-processing step for the dataset, where we identify the \textbf{subgroup IDs} of each sample. Then, we apply a clustering algorithm on the training set to discover the natural groups (clusters) it contains, where the samples in each of these groups are closer to each other than the others. The next step is dividing the training set into \textbf{cluster sets}, where the training samples are grouped according to their cluster IDs. Then, we oversample each of these cluster sets based on the subgroup IDs of the samples to achieve an equal number of samples for each subgroup that exists in the cluster. The final step is the classification step, where the classifier training and class label predictions of the test set occur. Here, we have studied three possible strategies for classifier training and label prediction, which are discussed further in Section \ref{ssec:str_classf}. The pseudocode of COSCFair is given in Algorithm \ref{alg1}.
 
-\input{Sections/pseudocode.tex}\label{alg1}
+
 
 
 \subsection{Data Preparation}\label{ssec:dataprep}
@@ -13,6 +13,8 @@ The data preparation step consists of several sub-steps, which are identifying t
 There are two base groups that are always privileged or unprivileged. If a subgroup has unfavorable values in both sensitive attributes, that subgroup becomes the most unprivileged subgroup in the dataset. If a subgroup has favorable values for both sensitive attributes, then that subgroup becomes the most privileged subgroup. The other subgroups that have different combinations of favorable and unfavorable values for different sensitive attributes should be interpreted as both potentially privileged and unprivileged subgroups. Thus, while investigating their position in a dataset, they should be tested as both privileged and unprivileged groups (see Table \ref{Table5}).
 
 After the subgroup ID variable is added, the sensitive attributes are removed from the dataset since the new subgroup IDs contain information regarding these sensitive attributes. Finally, if a dataset contains a set of numerical variables, these variables should be standardized in training and test sets separately so that they will not have domination over other variables in clustering and classification steps.
+
+\input{Sections/pseudocode.tex}\label{alg1}
 
 
 \subsection{Clustering}\label{ssec:clust}
